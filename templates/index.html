@@ -1,0 +1,76 @@
+{% extends "header.html" %}
+
+{% block title %}Sentiment Analyzer - SentMiX{% endblock %}
+
+{% block content %}
+
+<h1 style="color: #2c5150; text-align: center; font-size: 36px; padding: 20px;">
+    Clause-Level Sentiment Analysis Using Discourse Markers
+</h1>
+
+<form method="POST">
+    <textarea name="user_input" rows="5" placeholder="Paste your text here..." required style="width: 80%; height: 250px; padding: 1rem; font-size: 1rem; border-radius: 0.5rem; border: 2px solid #4a8c8a; background-color: white; color: #364743;"></textarea><br>
+    <input type="submit" value="Analyze Text" style="padding: 0.5rem 1rem; margin-top: 1rem; font-size: 1rem; border-radius: 0.5rem; background-color: #4a8c8a; color: white; border: none; cursor: pointer; font-family: 'Inconsolata', monospace; transition: background-color 0.3s ease;">
+</form>
+
+{% if results %}
+<h1 style="margin-top: 80px; margin-bottom: 30px; color: #2c5150;">RESULTS</h1>
+
+{% for item in results %}
+
+<table style="width: 100%; margin-top: 2rem; margin-bottom: 5rem; border: 2px solid #4a8c8a; border-radius: 1rem; background: white; color: #2c5150; border-collapse: collapse;">
+    
+    <tr style="background-color: #e0e8dc;">
+        <td colspan="2" style="border: 2px solid #4a8c8a; padding: 1rem; text-align: center; font-weight: bold;">{{ item.sentence }}</td>
+    </tr>
+
+    <tr>
+        <td colspan="2" style="border: 2px solid #4a8c8a; padding: 1rem; text-align: center;">
+            Your overall text sentiment is detected as: 
+            <strong class="
+                {% if overall == 'positive' %}positive
+                {% elif overall == 'negative' %}negative
+                {% else %}neutral
+                {% endif %}
+            ">{{ overall | capitalize }}</strong>.
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2" style="border: 2px solid #4a8c8a; padding: 1rem; text-align: left;">
+            <strong>Discourse markers present:</strong>
+            {% if item.discourse_markers %}
+                {{ item.discourse_markers | join(", ") }}
+            {% else %}
+                None
+            {% endif %}
+        </td>
+    </tr>
+
+    <tr style="background-color: #e0e8dc;">
+        <th style="border: 2px solid #4a8c8a; padding: 1rem; text-align: center;">Clause</th>
+        <th style="border: 2px solid #4a8c8a; padding: 1rem; text-align: center;">Sentiment</th>
+    </tr>
+
+    {% for clause in item.clauses %}
+    <tr>
+        <td style="border: 2px solid #4a8c8a; padding: 1rem; text-align: center;">{{ clause.clause }}</td>
+        <td style="border: 2px solid #4a8c8a; padding: 1rem; text-align: center;" class="{{ clause.sentiment }}">
+            {{ clause.sentiment | capitalize }}
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<style>
+    .positive { color: #4a8c8a; font-weight: bold; }
+    .neutral { color: #7a8c88; font-weight: bold; }
+    .negative { color: #d35d6e; font-weight: bold; }
+    input[type="submit"]:hover { background-color: #2c5150; }
+</style>
+
+{% endfor %}
+{% endif %}
+
+{% endblock %}

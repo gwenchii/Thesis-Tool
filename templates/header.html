@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}SentMiX: Taglish Clause-Level Sentiment Analyzer using Discourse Markers{% endblock %}</title>
+    <style>
+        :root {
+            --primary: #2c5150;    
+            --light-bg: #daefd5;   
+            --button: #4a8c8a;      
+            --hover: #1e3a38;     
+            --text: #364743;        
+        }
+        
+        body {
+            font-family: 'Inconsolata', monospace;
+            background-color: #f0f4ec; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        header {
+            background-color: var(--primary);
+            color: #daefd5; 
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            box-sizing: border-box;
+            height: 100px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .nav-links a {
+            color: #daefd5;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 24px;
+        }
+        .nav-links a:hover {
+            background-color: #daefd5;
+            color: var(--primary);
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+        }
+        footer {
+            background-color: var(--primary);
+            color: #daefd5;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            color: var(--text);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 1300px;
+            margin: 1in auto;
+            box-sizing: border-box;
+            font-size: 20px;
+        }
+        textarea {
+            width: 80%;
+            height: 250px;
+            padding: 1rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            border: 2px solid var(--button);
+            background-color: white;
+            color: var(--text);
+        }
+        input[type="submit"] {
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            background-color: var(--button);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: var(--hover);
+        }
+        table {
+            width: 100%;
+            margin-top: 1.5rem;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 2px solid var(--button);
+            padding: 0.5rem;
+            text-align: left;
+        }
+        th {
+            background-color: var(--primary);
+            color: #daefd5;
+        }
+        h1, h2 {
+            margin-top: 2rem;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 style="color: #daefd5;">SentMiX</h1>
+        <div class="nav-links">
+            <a href="/">Analyze</a>
+            <a href="/about">About the Tool</a>
+        </div>
+    </header>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        &copy; 2025 SentMiX 
+    </footer>
+
+</body>
+</html>
